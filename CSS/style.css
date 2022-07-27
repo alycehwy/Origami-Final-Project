@@ -33,3 +33,75 @@
   z-index: -1;
   background-color: #D9D9D9;;
 }
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content/Box */
+.modal-content {
+  width: 60%;
+  margin: 15% auto;
+  padding: 50px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  background-color: #fefefe;
+  position: relative;
+}
+
+.modal-background {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  top: 5px;
+  left: 5px;
+  background-color: #505050;
+  position: absolute;
+  z-index: -1;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.two-col {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  row-gap: 20px;
+}
+.two-col img {
+  width: 20vw;
+}
+.two-col > div {
+  width: 48%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+}
+.two-col input {
+  width: 40px;
+}
