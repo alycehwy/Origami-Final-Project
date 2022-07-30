@@ -67,28 +67,33 @@ class checkout{
     return taxByItem
   }
 }
-let icedCoffee = new coffeeInfo("Iced Coffee",3.15,"Served lightly sweetened and refreshing taste of the coffee served over ice","url");
-console.log(icedCoffee);
-let icedCoffeeOrder = new checkout("Iced Coffee","L",5,3.15);
-console.log(icedCoffeeOrder)
-console.log(icedCoffeeOrder.CalTotalByItem());
-console.log(icedCoffeeOrder.calTaxByItem());
+//loading JSON
+let JSONdata = [];
+spaApp.run(($http) => {
+  $http.get('./files/data.json')
+  .then((response) => {
+    JSONdata = response.data;
+    console.log(JSONdata);
+  })
+})
 
-// // Modal
-// var modal = document.getElementById("cart-modal");
-// var btn = document.getElementById("myBtn");
-// var span = document.getElementsByClassName("close")[0];
+// Modal --- FIX THIS
+console.log('Hello, World!');
 
-// btn.onclick = function () {
-//   modal.style.display = "block";
-// }
+var modal = document.getElementById("cart-modal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
 
-// span.onclick = function () {
-//   modal.style.display = "none";
-// }
+btn.addEventListener('click', () => {
+  modal.style.display = "block";
+});
 
-// window.onclick = function (event) {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
+span.addEventListener('click', () => {
+  modal.style.display = "none";
+});
+
+window.addEventListener('click', () => {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+});

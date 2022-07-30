@@ -3,67 +3,48 @@
         "name" : "Pour Over",
         "price" : "3.15",
         "description" : "Achieved by pouring boiling water slowly through coffee grounds.",
-        "img" : "url"
+        "img" : "./img/Pour_over.png"
     },
     {
         "name" : "Iced Coffee",
         "price" : "3.15",
         "description" : "Served lightly sweetened and refreshing taste of the coffee served over ice",
-        "img" : "url"
+        "img" : "./img/Ice_coffe.png"
     },
     {
         "name" : "Latte",
         "price" : "3.65",
         "description" : "A shot of espresso in steamed milk lightly toped with foam.",
-        "img" : "url"
+        "img" : "./img/Latte.png"
     },
     {
         "name" : "Iced Latte",
         "price" : "3.65",
         "description" : "Bold espresso and cold milk over ice.",
-        "img" : "url"
-    },
-    {
-        "name" : "Cappuccino",
-        "price" : "3.65",
-        "description" : "A shot of espresso topped with a deep layer of foamed milk.",
-        "img" : "url"
+        "img" : "./img/Ice_latte.png"
     },
     {
         "name" : "Mocha",
         "price" : "4.15",
         "description" : "Espresso with chocolate and steamed milk served with whipped cream.",
-        "img" : "url"
+        "img" : "./img/Mocha.png"
     },
     {
         "name" : "Iced Mocha",
         "price" : "4.15",
         "description" : "Espresso, milk and bittersweet mocha sauce serverd over ice and topped with whipped cream.",
-        "img" : "url"
-    },
-    {
-        "name" : "Caramel Macchiato",
-        "price" : "4.45",
-        "description" : "Sweetend cold milk marked by espresso shots, finished with caramel crosshatch.",
-        "img" : "url"
-        
+        "img" : "./img/Ice_mocha.png"
     },
     {
         "name" : "Espresso",
         "price" : "3.95",
         "description" : "A single shot of pure coffee in a small cup, tastes very strong and slightly quite bitter.",
-        "img" : "url"
+        "img" : "./img/Espresso.png"
     },
     {
         "name" : "Frappuccino",
         "price" : "4.75",
         "description" : "Consists of coffee or crème base, blended with ice and flavored syrups topped with whipped cream.",
-        "img" : "url"
-    },
-    {
-        "name" : "Hot Chocolate",
-        "price" : "3.15",
-        "description" : "Made from fine cocoa powder, sweet condensed milk and freshly steamed milk.",
-        "img" : "url"
+        "img" : "./img/Frappuchino.png"
     }
 ]
