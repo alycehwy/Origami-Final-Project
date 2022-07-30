@@ -40,21 +40,33 @@ spaApp.controller("spaCtrl",($scope)=>{
     }
 })
 
-// Modal
+//loading JSON
+let JSONdata = [];
+spaApp.run(($http) => {
+  $http.get('./files/data.json')
+  .then((response) => {
+    JSONdata = response.data;
+    console.log(JSONdata);
+  })
+})
+
+// Modal --- FIX THIS
+console.log('Hello, World!');
+
 var modal = document.getElementById("cart-modal");
 var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
-btn.onclick = function () {
+btn.addEventListener('click', () => {
   modal.style.display = "block";
-}
+});
 
-span.onclick = function () {
+span.addEventListener('click', () => {
   modal.style.display = "none";
-}
+});
 
-window.onclick = function (event) {
+window.addEventListener('click', () => {
   if (event.target == modal) {
     modal.style.display = "none";
   }
-}
+});
