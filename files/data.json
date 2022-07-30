@@ -24,12 +24,6 @@
         "img" : "./img/Ice_latte.png"
     },
     {
-        "name" : "Cappuccino",
-        "price" : "3.65",
-        "description" : "A shot of espresso topped with a deep layer of foamed milk.",
-        "img" : ""
-    },
-    {
         "name" : "Mocha",
         "price" : "4.15",
         "description" : "Espresso with chocolate and steamed milk served with whipped cream.",
@@ -42,13 +36,6 @@
         "img" : "./img/Ice_mocha.png"
     },
     {
-        "name" : "Caramel Macchiato",
-        "price" : "4.45",
-        "description" : "Sweetend cold milk marked by espresso shots, finished with caramel crosshatch.",
-        "img" : ""
-        
-    },
-    {
         "name" : "Espresso",
         "price" : "3.95",
         "description" : "A single shot of pure coffee in a small cup, tastes very strong and slightly quite bitter.",
@@ -59,11 +46,5 @@
         "price" : "4.75",
         "description" : "Consists of coffee or crème base, blended with ice and flavored syrups topped with whipped cream.",
         "img" : "./img/Frappuchino.png"
-    },
-    {
-        "name" : "Hot Chocolate",
-        "price" : "3.15",
-        "description" : "Made from fine cocoa powder, sweet condensed milk and freshly steamed milk.",
-        "img" : "url"
     }
 ]
