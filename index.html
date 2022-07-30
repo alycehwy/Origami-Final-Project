@@ -42,15 +42,13 @@
                 <div>
                     <label>Your Name: </label>
                     <input type="text" name="username" ng-model="username" required/>
-                    <p ng-hide="loginForm.username.$valid || loginForm.username.$pristine && loginForm.username.$untouched" ng-show="requiredName">*Name is required</p>
+                    <p ng-show="requiredName">*Name is required</p>
                 </div>
                 <div>
                     <label>Your Location: </label>
                     <select name="location" ng-model="location">
                         <option value=""></option>
                         <option value="BC">British Columbia</option>
-                        <option value="ON">Ontario</option>
-                        <option value="AB">Alberta</option>
                     </select>
                     <p ng-show="requiredLoc">*Location is required</p>
                 </div>
