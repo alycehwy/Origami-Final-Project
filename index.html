@@ -4,9 +4,117 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Origami Cafe</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
-    
+<body ng-app="spaApp" ng-controller="spaCtrl">
+    <header class="header">
+        <section class="left">
+            <img src="./img/logo.png" alt="store_logo">
+        </section>
+        <section class="right">
+            <nav class="nav">
+                <a class="no_link" href="#">
+                    <img src="./img/hi.png" alt="customer_name"> {{username}}
+                </a>
+                <a class="link" href="#!/">
+                    <img src="./img/locationIcon.png" alt="location_icon"> Burnaby
+                </a>
+                <a class="link" href="#!menu">
+                    <img src="./img/menuIcon.png" alt="menu_icon"> Menu
+                </a>
+                <a class="link" href="#!cart">
+                    <img src="./img/cartIcon.png" alt="cart_icon"> Cart
+                </a>
+            </nav>
+        </section>
+    </header>
+    <main ng-view>
+        <!-- content pages will be displayed here -->
+    </main>
+    <section id="intitalModal" ng-show="loginPage">
+        <div id="intital">
+            <img src="./img/logo.png" alt="logo" />
+            <h3>Welcome to Origami Cafe</h3>
+            <form name="loginForm">
+                <div>
+                    <label>Your Name: </label>
+                    <input type="text" name="username" ng-model="username" required/>
+                    <p ng-hide="loginForm.username.$valid || loginForm.username.$pristine && loginForm.username.$untouched" ng-show="requiredName">*Name is required</p>
+                </div>
+                <div>
+                    <label>Your Location: </label>
+                    <select name="location" ng-model="location">
+                        <option value=""></option>
+                        <option value="BC">British Columbia</option>
+                        <option value="ON">Ontario</option>
+                        <option value="AB">Alberta</option>
+                    </select>
+                    <p ng-show="requiredLoc">*Location is required</p>
+                </div>
+            </form>
+        </div>
+        <div id="login">
+            <button type="button" ng-click="loginPageClose()">Enter Origami Cafe</button>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="map" id="map">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2604.856111730303!2d-122.9727446364671!3d49.24121718691114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54867707fcadaafd%3A0x19a3b216ece894ee!2sBurnaby%2C%20BC%20V5G%203T1!5e0!3m2!1sen!2sca!4v1659127963845!5m2!1sen!2sca"
+                width="350" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="location_info" id="location_info">
+            <p>Phone: 415-815-8888</p>
+            <p>Email: tasty.drink@origami_cafe.com</p>
+            <p>Address: 5888 Deer Lake Ave Burnaby V5G 3T1</p>
+        </div>
+    </footer>
 </body>
+<script>
+    let spaApp = angular.module("spaApp",["ngRoute"]);
+    spaApp.config(($routeProvider)=>{
+        $routeProvider
+        .when("/",{
+            templateUrl:"./pages/home.html"
+        })
+        .when("/menu",{
+            templateUrl:"./pages/menu.html"
+        })
+        .when("/cart",{
+            templateUrl:"./pages/cart.html"
+        })
+        .when("/payment",{
+            templateUrl:"./pages/pay.html"
+        })
+    })
+    spaApp.run(($rootScope)=>{
+        $rootScope.loginPage = true;
+        $rootScope.requiredName = false;
+        $rootScope.requiredLoc = false;
+    })
+    spaApp.controller("spaCtrl",($scope)=>{
+        $scope.loginPageClose = ()=>{
+            if($scope.username == undefined && $scope.location == undefined){
+                $scope.requiredName = true;
+                $scope.requiredLoc = true;
+            }
+            else if($scope.username == undefined || $scope.username == ""){
+                $scope.requiredName = true;
+            }
+            else if($scope.location == undefined || $scope.location == ""){
+                $scope.requiredLoc = true;
+            }
+            else{
+                $scope.loginPage = false;
+            }
+        };
+        $scope.payClick = ()=>{
+            this.router.navigate("/payment");
+        }
+    })
+</script>
 </html>
