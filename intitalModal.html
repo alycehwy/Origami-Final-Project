@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    #intitalModal{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 5px;
+        border: 1px solid gainsboro;
+        border-radius: 36px;
+        width: 550px;
+        height: 300px;
+        font-size: 24px;
+        box-shadow: 10px 10px gainsboro;
+    }
+    #intitalModal img{
+        width: 300px;
+        height: 100px;
+    }
+    #intitalModal input, #intitalModal select{
+        border: 0;
+        border-bottom: 1px solid black;
+    }
+    #login{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 550px;
+        height: 100px;
+    }
+    #login button{
+        padding: 1.5%;
+        font-size: 16px;
+        border-radius: 10px;
+        background-color: #492401;
+        color: #FFFFFF;
+    }
+</style>
+<body>
+    <section>
+        <div id="intitalModal">
+            <img src="./svg/logo.svg" alt="logo" />
+            <p>Welcome to Origami Cafe</p>
+            <div>
+                <label>Your Name: </label>
+                <input type="text" name="username" />
+            </div>
+            <div>
+                <label>Your Location: </label>
+                <select name="location">
+                    <option value=""></option>
+                    <option value="BC">British Columbia</option>
+                    <option value="ON">Ontario</option>
+                    <option value="AB">Alberta</option>
+                </select>
+            </div>
+        </div>
+        <div id="login">
+            <button type="button">Enter Origami Cafe</button>
+        </div>
+    </section>
+</body>
+</html>
