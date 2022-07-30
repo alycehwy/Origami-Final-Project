@@ -1,65 +1,4 @@
 * {
-<<<<<<< HEAD
-    margin: 0;
-    padding: 0;
-}
-
-/* CART SECTION */
-.cart-section {
-    display: flex;
-    flex-direction: column;
-    row-gap: 35px;
-    padding-top: 50px;
-}
-
-.order-list {
-    display: flex;
-    column-gap: 35px;
-    align-items: center;
-    margin: 0 auto;
-}
-
-.order-list p {
-    font-size: 28px;
-    width: 150px;
-}
-
-.order-list label {
-    font-size: 20px;
-    color: gray;
-}
-
-.order-list select {
-    width: 80px;
-    height: 30px;
-    font-size: 18px;
-}
-
-.price {
-    padding-left: 100px;
-}
-
-.total {
-    display: flex;
-    flex-direction: column;
-    text-align: right;
-    margin-top: 50px;
-    margin-right: 100px;
-    font-size: 28px;
-}
-
-.total p:first-child {
-    margin-left: 55%;
-    margin-bottom: 20px;
-    border-bottom: 1px solid black;
-}
-
-.cart-section .button {
-    display: flex;
-    justify-content: center;
-    column-gap: 50px;
-    padding-top: 50px;
-=======
   padding: 0;
   margin: 0;
 }
@@ -477,24 +416,10 @@ main {
   justify-content: center;
   column-gap: 50px;
   padding-top: 50px;
->>>>>>> fde7f8e6a8c9161009ed1e4977864e0703e493b7
 }
 
 .cart-section .button input,
 .pay-section [type="submit"] {
-<<<<<<< HEAD
-    width: 150px;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.cart-section .button input:first-child {
-    background-color: #868686;
-    color: #fff;
-=======
   width: 150px;
   font-size: 20px;
   font-weight: bold;
@@ -506,51 +431,10 @@ main {
 .cart-section .button input:first-child {
   background-color: #868686;
   color: #fff;
->>>>>>> fde7f8e6a8c9161009ed1e4977864e0703e493b7
 }
 
 .cart-section .button input:last-child,
 .pay-section [type="submit"] {
-<<<<<<< HEAD
-    background-color: #492401;
-    color: #fff;
-}
-
-/* PAYMENT SECTION */
-
-.pay-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 35px;
-    margin-top: 50px;
-}
-
-.pay-section form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 45px;
-    margin-bottom: 50px;
-}
-
-.pay-section div {
-    display: flex;
-    justify-content: left;
-    column-gap: 35px;
-}
-
-.pay-section label {
-    width: 150px;
-    font-size: 20px;
-}
-
-.pay-section form input {
-    width: 250px;
-}
-
-.pay-section p {
-    font-size: 20px;
-=======
   background-color: #492401;
   color: #fff;
 }
@@ -588,5 +472,4 @@ main {
 
 .pay-section p {
   font-size: 20px;
->>>>>>> fde7f8e6a8c9161009ed1e4977864e0703e493b7
 }
