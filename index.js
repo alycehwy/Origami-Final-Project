@@ -38,6 +38,12 @@ spaApp.controller("spaCtrl",($scope)=>{
         }
     };
 })
+
+spaApp.controller("menuCtrl", ($scope) => {
+  $scope.data = 
+  console.log('Talking from menu');
+})
+
 class coffeeInfo{
   constructor(name,price,description,img){
     this.name = name;
