@@ -19,7 +19,7 @@ spaApp.run(($rootScope)=>{
     $rootScope.requiredName = false;
     $rootScope.requiredLoc = false;
 })
-spaApp.controller("spaCtrl",($scope)=>{
+spaApp.controller("spaCtrl",($scope,$http)=>{
     $scope.loginPageClose = ()=>{
         if($scope.username == undefined && $scope.location == undefined || $scope.location == ""){
             $scope.requiredName = true;
@@ -37,9 +37,26 @@ spaApp.controller("spaCtrl",($scope)=>{
             $scope.loginPage = false;
         }
     };
+    //loading JSON
+    let JSONdata = [];
+    let JSONObj = [];
+    let id = 1;
+    $http.get('./files/data.json').then(
+      (response)=>{
+        JSONdata = response.data;
+        // console.log(JSONdata);
+        for(let obj of JSONdata){
+          ItemObj = new coffeeInfo(id,obj.name,obj.price,obj.description,obj.img);
+          JSONObj.push(ItemObj);
+          id++;
+        }
+      }
+    );
+    console.log(JSONObj);
 })
 class coffeeInfo{
-  constructor(name,price,description,img){
+  constructor(id,name,price,description,img){
+    this.id = id;
     this.name = name;
     this.price = price;
     this.description = description;
@@ -67,15 +84,6 @@ class checkout{
     return taxByItem
   }
 }
-//loading JSON
-let JSONdata = [];
-spaApp.run(($http) => {
-  $http.get('./files/data.json')
-  .then((response) => {
-    JSONdata = response.data;
-    console.log(JSONdata);
-  })
-})
 
 // Modal --- FIX THIS
 console.log('Hello, World!');
