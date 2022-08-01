@@ -75,6 +75,13 @@ spaApp.controller("spaCtrl",($scope, $rootScope)=>{
       $scope.inpQty = 1;
       $scope.closeBtn();  
     }
+    $scope.calTotalTax = ()=>{
+      let totalTax = 0;
+      for (let tax of $rootScope.cartObj){
+        totalTax += parseFloat(tax.calTaxByItem());
+      }
+      return totalTax
+    }
 })
 
 class coffeeInfo{
