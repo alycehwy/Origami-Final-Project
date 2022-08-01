@@ -55,6 +55,7 @@ spaApp.controller("spaCtrl",($scope, $rootScope)=>{
         }
     };
 
+    // $scope.curObj;
     $scope.showItem = ()=>{
       $scope.menuPage = true;
       // Print the info on the modal
@@ -67,15 +68,13 @@ spaApp.controller("spaCtrl",($scope, $rootScope)=>{
     $scope.payDone = ()=>{
       $scope.payDoneModal = true;
     }
-
-    // object for cart
-    $scope.cartItem = new checkout("Iced Coffee","M",2,3.15);
-    $scope.cartObj.push($scope.cartItem);
-    // $scope.cartItem = new checkout("Latte","S",4,3.65);
-    // $rootScope.cartObj.push($scope.cartItem);
-    // console.log($rootScope.cartItem)
-    // console.log($scope.cartObj)
-
+    $scope.addToCart = () => {
+      let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
+      $rootScope.cartObj.push(cartItem);
+      $scope.inpSize = 'S';
+      $scope.inpQty = 1;
+      $scope.closeBtn();  
+    }
 })
 
 class coffeeInfo{
@@ -89,11 +88,12 @@ class coffeeInfo{
 }
 // class for stroe information from shopping cart and calculate tax and total by Item
 class checkout{
-  constructor(name,size,quantity,price){
+  constructor(name,size,quantity,price, img){
     this.name = name;
     this.size = size;
     this.quantity = quantity;
     this.price = price;
+    this.img = img;
   }
   CalTotalByItem(){
     let totalByItem = 0;

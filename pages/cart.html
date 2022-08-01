@@ -2,7 +2,7 @@
 <section class="cart-section" ng-controller="spaCtrl">
 
     <div class="order-list" ng-repeat="obj in cartObj">
-        <img src="../img/Ice_latte.png" alt="icelatte">
+        <img src="{{obj.img}}" alt="icelatte">
         <p>{{obj.name}}</p>
 
         <div class="size-select">
