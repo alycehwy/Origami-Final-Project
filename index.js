@@ -19,7 +19,9 @@ spaApp.run(($rootScope)=>{
     $rootScope.requiredName = false;
     $rootScope.requiredLoc = false;
     $rootScope.menuPage = false;
+    $rootScope.payDoneModal = false;
 })
+
 spaApp.controller("spaCtrl",($scope,$http)=>{
     $scope.loginPageClose = ()=>{
         if($scope.username == undefined && $scope.location == undefined || $scope.location == ""){
@@ -57,12 +59,13 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
     // show the menu item in modal box
     $scope.showItem = ()=>{
       $scope.menuPage = true;
+      console.log(this.event.path)
     }
     $scope.closeBtn = ()=>{
       $scope.menuPage = false;
     }
-    $scope.payClick = ()=>{
-      this.router.navigateByUrl("/pay");
+    $scope.payDone = ()=>{
+      $scope.payDoneModal = true;
     }
 })
 // class for stroe information from JSON file

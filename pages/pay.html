@@ -30,11 +30,25 @@
             <label for="csv">CSV No.</label>
             <input type="number" id="csv">
         </div>
-        <div>
-            <p>Total : 24.6</p>
+        <div class="payTotal">
+            <p>Total : $ 24.6</p>
         </div>
     </form>
 
-    <input type="submit" value="Pay Now">
+    <button class="payInfo" type="submit" ng-click="payDone()">Pay Now</button>
+
+    <div id="pay-done-modal" class="payDone" ng-show="payDoneModal">
+        <div class="payDone-content">
+            <div>
+                <h1>Pay Success !!</h1>
+                <h3>~ Thank you for shopping on Origami Cafe ~</h3>
+            </div>
+            <div>
+                <button type="button"><a href="">Make Another Order</a></button>
+                <button type="button"><a href="">Go Home Page</a></button>
+            </div>
+            <div class="modal-background"></div>
+        </div>
+    </div>
 
 </section>
