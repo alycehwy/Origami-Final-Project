@@ -14,15 +14,29 @@ spaApp.config(($routeProvider)=>{
         templateUrl:"./pages/pay.html"
     })
 })
-spaApp.run(($rootScope)=>{
-    $rootScope.loginPage = true;
-    $rootScope.requiredName = false;
-    $rootScope.requiredLoc = false;
-    $rootScope.menuPage = false;
-    $rootScope.payDoneModal = false;
-})
+spaApp.run(($rootScope, $http)=>{
+  $rootScope.loginPage = true;
+  $rootScope.requiredName = false;
+  $rootScope.requiredLoc = false;
+  $rootScope.menuPage = false;
+  $rootScope.JSONdata = [];
+  $rootScope.JSONObj = [];
+  $rootScope.cartObj = [];
 
-spaApp.controller("spaCtrl",($scope,$http)=>{
+  let id = 1;
+  $http.get('./files/data.json')
+  .then((response) => {
+      $rootScope.JSONdata = response.data;
+      console.log($rootScope.JSONdata);
+      for (let obj of $rootScope.JSONdata) {
+        ItemObj = new coffeeInfo(id, obj.name, obj.price, obj.description, obj.img);
+        $rootScope.JSONObj.push(ItemObj);
+        id++;
+      }
+    }
+  );
+})
+spaApp.controller("spaCtrl",($scope, $rootScope)=>{
     $scope.loginPageClose = ()=>{
         if($scope.username == undefined && $scope.location == undefined || $scope.location == ""){
             $scope.requiredName = true;
@@ -40,26 +54,12 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
             $scope.loginPage = false;
         }
     };
-    //loading JSON and put informatio to object
-    let JSONdata = [];
-    let JSONObj = [];
-    let id = 1;
-    $http.get('./files/data.json').then(
-      (response)=>{
-        JSONdata = response.data;
-        // console.log(JSONdata);
-        for(let obj of JSONdata){
-          ItemObj = new coffeeInfo(id,obj.name,obj.price,obj.description,obj.img);
-          JSONObj.push(ItemObj);
-          id++;
-        }
-      }
-    );
-    // console.log(JSONObj);
-    // show the menu item in modal box
+
     $scope.showItem = ()=>{
       $scope.menuPage = true;
-      console.log(this.event.path)
+      // Print the info on the modal
+      let curSel = parseInt(this.event.target.dataset.id);
+      $scope.curObj = $rootScope.JSONObj.filter(obj => obj.id == curSel);
     }
     $scope.closeBtn = ()=>{
       $scope.menuPage = false;
@@ -67,8 +67,17 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
     $scope.payDone = ()=>{
       $scope.payDoneModal = true;
     }
+
+    // object for cart
+    $scope.cartItem = new checkout("Iced Coffee","M",2,3.15);
+    $scope.cartObj.push($scope.cartItem);
+    // $scope.cartItem = new checkout("Latte","S",4,3.65);
+    // $rootScope.cartObj.push($scope.cartItem);
+    // console.log($rootScope.cartItem)
+    // console.log($scope.cartObj)
+
 })
-// class for stroe information from JSON file
+
 class coffeeInfo{
   constructor(id,name,price,description,img){
     this.id = id;

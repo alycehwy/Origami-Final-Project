@@ -1,21 +1,23 @@
 <!-- CART SECTIOIN -->
 <section class="cart-section" ng-controller="spaCtrl">
 
-    <div class="order-list">
+    <div class="order-list" ng-repeat="obj in cartObj">
         <img src="../img/Ice_latte.png" alt="icelatte">
-        <p>Ice Latte</p>
+        <p>{{obj.name}}</p>
 
         <div class="size-select">
             <label for="size">Size: </label>
-            <select name="size" id="size">
+            <P>{{obj.size}}</P>
+            <!-- <select name="size" id="size">
                 <option value="smaill">S</option>
                 <option value="midium">M</option>
                 <option value="large">L</option>
-            </select>
+            </select> -->
         </div>
         <div class="quantity-select">
             <label for="quantity">Quantity: </label>
-            <select name="quantity">
+            <p>{{obj.quantity}}</p>
+            <!-- <select name="quantity">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -26,12 +28,12 @@
                 <option value="8">8</option>
                 <option value="9">9</option>
                 <option value="10">10</option>
-            </select>
+            </select> -->
         </div>
-        <p class="price">Price: 4.45</p>
+        <p class="price">Price: {{obj.CalTotalByItem()}}</p>
     </div>
 
-    <div class="order-list">
+    <!-- <div class="order-list">
         <img src="../img/Ice_mocha.png" alt="icelatte">
         <p>Ice Mocha</p>
 
@@ -59,7 +61,7 @@
             </select>
         </div>
         <p class="price">Price: 4.45</p>
-    </div>
+    </div> -->
 
     <div class="total">
         <p>Tax: 1.64</p>

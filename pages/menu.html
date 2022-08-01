@@ -1,42 +1,11 @@
 <section id="menu" ng-controller="spaCtrl">
   <div class="menu-container">
-
-    <div class="product-card" id="1" ng-click="showItem()">
+    <div ng-repeat="item in JSONObj" data-id="{{item.id}}" class="product-card" ng-click="showItem()">
       <div>
-        <img src="../img/Espresso.png" id="1">
+        <img data-id="{{item.id}}" src={{item.img}}>
       </div>
       <div>
-        <h4>Espresso</h4>
-      </div>
-      <div class="background"></div>
-    </div>
-
-    <div class="product-card" id="2" ng-click="showItem()" >
-      <div>
-        <img src="../img/Latte.png" id="2">
-      </div>
-      <div>
-        <h4>Latte</h4>
-      </div>
-      <div class="background"></div>
-    </div>
-
-    <div class="product-card" id="3" ng-click="showItem()" >
-      <div>
-        <img src="../img/Frappuchino.png" id="3">
-      </div>
-      <div>
-        <h4>Latte</h4>
-      </div>
-      <div class="background"></div>
-    </div>
-
-    <div class="product-card" id="4" ng-click="showItem()" >
-      <div>
-        <img src="../img/Ice_coffe.png" id="4">
-      </div>
-      <div>
-        <h4>Latte</h4>
+        <h4 data-id="{{item.id}}">{{item.name}}</h4>
       </div>
       <div class="background"></div>
     </div>
@@ -47,10 +16,10 @@
     <div class="modal-content">
       <span class="close" ng-click="closeBtn()">&times;</span>
       <div class="two-col">
-        <img src="./files/img/Espresso.png">
+        <img src="{{curObj[0].img}}">
         <div>
-          <h4><span>Ice Mocha </span><span>$5.99</span></h4>
-          <p>Premium espresso pour over on dark chocolate ice cream.</p>
+          <h4><span>{{curObj[0].name}}</span><span>{{curObj[0].price}}</span></h4>
+          <p>{{curObj[0].description}}</p>
           <form>
             <label for="">Size: </label>
             <select name="" id="">
