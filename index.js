@@ -14,13 +14,28 @@ spaApp.config(($routeProvider)=>{
         templateUrl:"./pages/pay.html"
     })
 })
-spaApp.run(($rootScope)=>{
-    $rootScope.loginPage = true;
-    $rootScope.requiredName = false;
-    $rootScope.requiredLoc = false;
+spaApp.run(($rootScope, $http)=>{
+  $rootScope.loginPage = true;
+  $rootScope.requiredName = false;
+  $rootScope.requiredLoc = false;
+  $rootScope.menuPage = false;
+  $rootScope.JSONdata = [];
+  $rootScope.JSONObj = [];
+
+  let id = 1;
+  $http.get('./files/data.json')
+  .then((response) => {
+      $rootScope.JSONdata = response.data;
+      console.log($rootScope.JSONdata);
+      for (let obj of $rootScope.JSONdata) {
+        ItemObj = new coffeeInfo(id, obj.name, obj.price, obj.description, obj.img);
+        $rootScope.JSONObj.push(ItemObj);
+        id++;
+      }
+    }
+  );
 })
-let JSONObj = [];
-spaApp.controller("spaCtrl",($scope,$http)=>{
+spaApp.controller("spaCtrl",($scope, $rootScope)=>{
     $scope.loginPageClose = ()=>{
         if($scope.username == undefined && $scope.location == undefined || $scope.location == ""){
             $scope.requiredName = true;
@@ -38,25 +53,20 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
             $scope.loginPage = false;
         }
     };
-    //loading JSON
-    let JSONdata = [];
-    let id = 1;
-    $http.get('./files/data.json').then(
-      (response)=>{
-        JSONdata = response.data;
-        // console.log(JSONdata);
-        for(let obj of JSONdata){
-          ItemObj = new coffeeInfo(id,obj.name,obj.price,obj.description,obj.img);
-          JSONObj.push(ItemObj);
-          id++;
-        }
-      }
-    );
-    console.log(JSONObj);
-})
 
-spaApp.controller("menuCtrl", ($scope) => {
-  $scope.data = JSONObj;
+    $scope.showItem = ()=>{
+      $scope.menuPage = true;
+
+      // Print the info on the modal
+      let curSel = parseInt(this.event.target.dataset.id);
+      $scope.curObj = $rootScope.JSONObj.filter(obj => obj.id == curSel);
+    }
+    $scope.closeBtn = ()=>{
+      $scope.menuPage = false;
+    }
+    $scope.payClick = ()=>{
+      this.router.navigateByUrl("/pay");
+    }
 })
 
 class coffeeInfo{
@@ -68,6 +78,7 @@ class coffeeInfo{
     this.img = img;
   }
 }
+// class for stroe information from shopping cart and calculate tax and total by Item
 class checkout{
   constructor(name,size,quantity,price){
     this.name = name;
@@ -89,24 +100,3 @@ class checkout{
     return taxByItem
   }
 }
-
-// Modal --- FIX THIS
-// console.log('Hello, World!');
-
-// var modal = document.getElementById("cart-modal");
-// var btn = document.getElementById("myBtn");
-// var span = document.getElementsByClassName("close")[0];
-
-// btn.addEventListener('click', () => {
-//   modal.style.display = "block";
-// });
-
-// span.addEventListener('click', () => {
-//   modal.style.display = "none";
-// });
-
-// window.addEventListener('click', () => {
-//   if (event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// });
