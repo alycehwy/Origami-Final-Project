@@ -1,42 +1,12 @@
   <section id="menu" ng-controller="menuCtrl">
     <div class="menu-container">
   
-      <div class="product-card">
+      <div ng-repeat="item in data" class="product-card">
         <div>
-          <img src="../img/Espresso.png">
+          <img src={{item.img}}>
         </div>
         <div>
-          <h4>Espresso</h4>
-        </div>
-        <div class="background"></div>
-      </div>
-  
-      <div class="product-card">
-        <div>
-          <img src="../img/Latte.png">
-        </div>
-        <div>
-          <h4>Latte</h4>
-        </div>
-        <div class="background"></div>
-      </div>
-
-      <div class="product-card">
-        <div>
-          <img src="../img/Frappuchino.png">
-        </div>
-        <div>
-          <h4>Latte</h4>
-        </div>
-        <div class="background"></div>
-      </div>
-
-      <div class="product-card">
-        <div>
-          <img src="../img/Ice_coffe.png">
-        </div>
-        <div>
-          <h4>Latte</h4>
+          <h4>{{item.name}}</h4>
         </div>
         <div class="background"></div>
       </div>

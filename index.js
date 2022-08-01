@@ -19,6 +19,7 @@ spaApp.run(($rootScope)=>{
     $rootScope.requiredName = false;
     $rootScope.requiredLoc = false;
 })
+let JSONObj = [];
 spaApp.controller("spaCtrl",($scope,$http)=>{
     $scope.loginPageClose = ()=>{
         if($scope.username == undefined && $scope.location == undefined || $scope.location == ""){
@@ -39,7 +40,6 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
     };
     //loading JSON
     let JSONdata = [];
-    let JSONObj = [];
     let id = 1;
     $http.get('./files/data.json').then(
       (response)=>{
@@ -56,8 +56,7 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
 })
 
 spaApp.controller("menuCtrl", ($scope) => {
-  $scope.data = 
-  console.log('Talking from menu');
+  $scope.data = JSONObj;
 })
 
 class coffeeInfo{
@@ -92,22 +91,22 @@ class checkout{
 }
 
 // Modal --- FIX THIS
-console.log('Hello, World!');
+// console.log('Hello, World!');
 
-var modal = document.getElementById("cart-modal");
-var btn = document.getElementById("myBtn");
-var span = document.getElementsByClassName("close")[0];
+// var modal = document.getElementById("cart-modal");
+// var btn = document.getElementById("myBtn");
+// var span = document.getElementsByClassName("close")[0];
 
-btn.addEventListener('click', () => {
-  modal.style.display = "block";
-});
+// btn.addEventListener('click', () => {
+//   modal.style.display = "block";
+// });
 
-span.addEventListener('click', () => {
-  modal.style.display = "none";
-});
+// span.addEventListener('click', () => {
+//   modal.style.display = "none";
+// });
 
-window.addEventListener('click', () => {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-});
+// window.addEventListener('click', () => {
+//   if (event.target == modal) {
+//     modal.style.display = "none";
+//   }
+// });
