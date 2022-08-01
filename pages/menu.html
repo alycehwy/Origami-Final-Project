@@ -22,15 +22,15 @@
           <p>{{curObj[0].description}}</p>
           <form>
             <label for="">Size: </label>
-            <select name="" id="">
-              <option value="">S</option>
-              <option value="">M</option>
-              <option value="">L</option>
+            <select name="" id="" ng-model="inpSize" ng-init="inpSize = 'S'">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
             </select>
             <label for="">Quantity: </label>
-            <input type="number" name="" id="">
+            <input type="number" ng-model="inpQty" min="1" ng-init="inpQty = 1">
           </form>
-          <button type="button">Add</button>
+          <button type="button" ng-click="addToCart()">Add</button>
         </div>
       </div>
       <div class="modal-background"></div>
