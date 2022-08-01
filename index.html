@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +10,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body ng-app="spaApp" ng-controller="spaCtrl">
     <header class="header">
         <section class="left">
-            <img src="./img/logo.png" alt="store_logo">
+            <img src="./img/logo.png" alt="store_logo" ng-click="showItem()" />
         </section>
         <section class="right">
             <nav class="nav">
@@ -34,6 +36,7 @@
     <main ng-view>
         <!-- content pages will be displayed here -->
     </main>
+    <!-- The Modal for login page -->
     <section id="intitalModal" ng-show="loginPage">
         <div id="intital">
             <img src="./img/logo.png" alt="logo" />
@@ -41,12 +44,12 @@
             <form name="loginForm">
                 <div>
                     <label>Your Name: </label>
-                    <input type="text" name="username" ng-model="username" required/>
+                    <input type="text" name="username" ng-model="username" required />
                     <p ng-show="requiredName">*Name is required</p>
                 </div>
                 <div>
                     <label>Your Location: </label>
-                    <select name="location" ng-model="location">
+                    <select name="location" ng-model="location" required>
                         <option value=""></option>
                         <option value="BC">British Columbia</option>
                     </select>
@@ -73,4 +76,5 @@
     </footer>
 </body>
 <script src="./index.js"></script>
+
 </html>

@@ -18,6 +18,7 @@ spaApp.run(($rootScope)=>{
     $rootScope.loginPage = true;
     $rootScope.requiredName = false;
     $rootScope.requiredLoc = false;
+    $rootScope.menuPage = false;
 })
 spaApp.controller("spaCtrl",($scope,$http)=>{
     $scope.loginPageClose = ()=>{
@@ -37,7 +38,7 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
             $scope.loginPage = false;
         }
     };
-    //loading JSON
+    //loading JSON and put informatio to object
     let JSONdata = [];
     let JSONObj = [];
     let id = 1;
@@ -52,7 +53,14 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
         }
       }
     );
-    console.log(JSONObj);
+    // console.log(JSONObj);
+    // show the menu item in modal box
+    $scope.showItem = ()=>{
+      $scope.menuPage = true;
+    }
+    $scope.closeBtn = ()=>{
+      $scope.menuPage = false;
+    }
 })
 class coffeeInfo{
   constructor(id,name,price,description,img){
@@ -84,24 +92,3 @@ class checkout{
     return taxByItem
   }
 }
-
-// Modal --- FIX THIS
-console.log('Hello, World!');
-
-var modal = document.getElementById("cart-modal");
-var btn = document.getElementById("myBtn");
-var span = document.getElementsByClassName("close")[0];
-
-btn.addEventListener('click', () => {
-  modal.style.display = "block";
-});
-
-span.addEventListener('click', () => {
-  modal.style.display = "none";
-});
-
-window.addEventListener('click', () => {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-});
