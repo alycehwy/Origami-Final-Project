@@ -1,4 +1,4 @@
-let spaApp = angular.module("spaApp",["ngRoute"]);
+let spaApp = angular.module("spaApp",["ngRoute","ngCookies"]);
 spaApp.config(($routeProvider)=>{
     $routeProvider
     .when("/",{
@@ -20,7 +20,7 @@ spaApp.run(($rootScope)=>{
     $rootScope.requiredLoc = false;
     $rootScope.menuPage = false;
 })
-spaApp.controller("spaCtrl",($scope,$http)=>{
+spaApp.controller("spaCtrl",($scope,$http,$cookies)=>{
     $scope.loginPageClose = ()=>{
         if($scope.username == undefined && $scope.location == undefined || $scope.location == ""){
             $scope.requiredName = true;
@@ -64,7 +64,19 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
     $scope.payClick = ()=>{
       this.router.navigateByUrl("/pay");
     }
+
+    $scope.paypay = function(){
+      $cookies.put("Name",$scope.buyerName);
+      $cookies.put("Phone",$scope.buyerTel);
+      $cookies.put("Email",$scope.buyerEmail);
+      $cookies.put("cardName",$scope.payerName);
+      $cookies.put("cardNum",$scope.payerCard);
+      $cookies.put("Exp",$scope.payerExp);
+      $cookies.put("CSV",$scope.payerCsv);
+    }
 })
+
+
 // class for stroe information from JSON file
 class coffeeInfo{
   constructor(id,name,price,description,img){
@@ -96,4 +108,6 @@ class checkout{
     taxByItem = taxByItem.toFixed(2);
     return taxByItem
   }
+
+
 }
