@@ -75,6 +75,13 @@ spaApp.controller("spaCtrl",($scope, $rootScope)=>{
       $scope.inpQty = 1;
       $scope.closeBtn();  
     }
+    $scope.showTotal = () => {
+      let sum = 0;
+      $rootScope.cartObj.forEach(e => {
+        sum += parseFloat(e.CalTotalByItem());
+      });
+      return sum
+    }
 })
 
 class coffeeInfo{
