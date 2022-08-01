@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +9,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@100;300;400;500;700;800&family=Noto+Sans+Display&display=swap"
+        rel="stylesheet">
+
+
 </head>
+
 <body ng-app="spaApp" ng-controller="spaCtrl">
     <header class="header">
         <section class="left">
-            <img src="./img/logo.png" alt="store_logo">
+            <img src="./img/logo.png" alt="store_logo" ng-click="showItem()" />
         </section>
         <section class="right">
             <nav class="nav">
@@ -34,6 +44,7 @@
     <main ng-view>
         <!-- content pages will be displayed here -->
     </main>
+    <!-- The Modal for login page -->
     <section id="intitalModal" ng-show="loginPage">
         <div id="intital">
             <img src="./img/logo.png" alt="logo" />
@@ -41,16 +52,16 @@
             <form name="loginForm">
                 <div>
                     <label>Your Name: </label>
-                    <input type="text" name="username" ng-model="username" required/>
-                    <p ng-hide="loginForm.username.$valid || loginForm.username.$pristine && loginForm.username.$untouched" ng-show="requiredName">*Name is required</p>
+                    <input type="text" name="username" ng-model="username" required />
+                    <p ng-show="requiredName">*Name is required</p>
                 </div>
                 <div>
                     <label>Your Location: </label>
-                    <select name="location" ng-model="location">
+                    <select name="location" ng-model="location" required>
                         <option value=""></option>
-                        <option value="BC">British Columbia</option>
-                        <option value="ON">Ontario</option>
-                        <option value="AB">Alberta</option>
+                        <option value="BC">Burnaby Store</option>
+                        <!-- <option value="ON">Ontario</option>
+                        <option value="AB">Alberta</option> -->
                     </select>
                     <p ng-show="requiredLoc">*Location is required</p>
                 </div>
@@ -64,7 +75,7 @@
         <div class="map" id="map">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2604.856111730303!2d-122.9727446364671!3d49.24121718691114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54867707fcadaafd%3A0x19a3b216ece894ee!2sBurnaby%2C%20BC%20V5G%203T1!5e0!3m2!1sen!2sca!4v1659127963845!5m2!1sen!2sca"
-                width="350" height="200" style="border:0;" allowfullscreen="" loading="lazy"
+                width="250" height="150" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="location_info" id="location_info">
@@ -74,47 +85,6 @@
         </div>
     </footer>
 </body>
-<script>
-    let spaApp = angular.module("spaApp",["ngRoute"]);
-    spaApp.config(($routeProvider)=>{
-        $routeProvider
-        .when("/",{
-            templateUrl:"./pages/home.html"
-        })
-        .when("/menu",{
-            templateUrl:"./pages/menu.html"
-        })
-        .when("/cart",{
-            templateUrl:"./pages/cart.html"
-        })
-        .when("/payment",{
-            templateUrl:"./pages/pay.html"
-        })
-    })
-    spaApp.run(($rootScope)=>{
-        $rootScope.loginPage = true;
-        $rootScope.requiredName = false;
-        $rootScope.requiredLoc = false;
-    })
-    spaApp.controller("spaCtrl",($scope)=>{
-        $scope.loginPageClose = ()=>{
-            if($scope.username == undefined && $scope.location == undefined){
-                $scope.requiredName = true;
-                $scope.requiredLoc = true;
-            }
-            else if($scope.username == undefined || $scope.username == ""){
-                $scope.requiredName = true;
-            }
-            else if($scope.location == undefined || $scope.location == ""){
-                $scope.requiredLoc = true;
-            }
-            else{
-                $scope.loginPage = false;
-            }
-        };
-        $scope.payClick = ()=>{
-            this.router.navigate("/payment");
-        }
-    })
-</script>
+<script src="./index.js"></script>
+
 </html>
