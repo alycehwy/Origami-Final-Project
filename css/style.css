@@ -1,12 +1,14 @@
 * {
   padding: 0;
   margin: 0;
+  
 }
 
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'M PLUS 1p', sans-serif;
 }
 
 main {
@@ -17,7 +19,6 @@ main {
 .header {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid gray;
   width: 90%;
 }
 
@@ -67,11 +68,11 @@ main {
 }
 
 .map {
-  padding: 3% 0 3% 0;
+  padding: 1% 0 1% 0;
 }
 
 .location_info {
-  font-size: 28px;
+  font-size: 19px;
   font-weight: 100;
   line-height: 6vh;
 }
@@ -155,7 +156,7 @@ main {
 
 /* Home Page */
 #homebg aside {
-  height: 1000px;
+  height: 660px;
   background-image: url("../img/backgroundPic.jpg");
   background-position: center;
   background-size: cover;
@@ -208,7 +209,7 @@ main {
 }
 
 #intro div p {
-  font-size: 24px;
+  font-size: 19px;
   width: 90%;
   text-align: center;
 }
@@ -219,6 +220,7 @@ main {
   border-radius: 10px;
   background-color: #492401;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 #homePagePic1 {
@@ -252,19 +254,23 @@ main {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-  row-gap: 60px;
+  margin-top: -11px;
+  margin: -11px 80px 0px 80px;
+  row-gap: 6px;
+  border-top: 1px solid gray;
 }
 
 .product-card {
-  width: 35vw;
+  width: 11vw;
   min-width: 200px;
-  margin: 24px;
+  margin: 46px;
   position: relative;
   text-align: center;
+  color: white;
 }
 
 .product-card img {
-  width: 100%;
+  width:100%;
 }
 
 .background {
@@ -275,8 +281,7 @@ main {
   top: 10px;
   left: 10px;
   z-index: -1;
-  background-color: #D9D9D9;
-  ;
+  background-color: rgb(70, 70, 70);
 }
 
 /* The Menu Modal (background) */
@@ -355,11 +360,14 @@ main {
 
 /* Cart Section */
 .cart-section {
+  /* background-color: aqua; */
   display: flex;
   flex-direction: column;
   row-gap: 35px;
+  margin: 0px 90px 50px 90px;
   padding-top: 50px;
   padding-bottom: 50px;
+  border-top: 1px solid gray;
 }
 
 .order-list {
@@ -419,23 +427,28 @@ main {
 
 .cart-section .button input,
 .pay-section [type="submit"] {
-  width: 150px;
+  padding: 0.6%;
   font-size: 20px;
-  font-weight: bold;
-  padding: 8px;
-  border-radius: 8px;
+  border-radius: 10px;
+  background-color: #492401;
+  color: #FFFFFF;
   cursor: pointer;
 }
 
-.cart-section .button input:first-child {
-  background-color: #868686;
-  color: #fff;
+.clear{
+  padding: 0.6%;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: gray;
+  color: #FFFFFF;
 }
 
-.cart-section .button input:last-child,
-.pay-section [type="submit"] {
+.pay{
+  padding: 0.6%;
+  font-size: 20px;
+  border-radius: 10px;
   background-color: #492401;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 /* Payment Section */
@@ -444,7 +457,9 @@ main {
   flex-direction: column;
   align-items: center;
   row-gap: 35px;
-  margin-top: 50px;
+  padding: 66px 0px 66px 0px;
+  margin: 0px 88px 0px 88px;
+  border-top: 1px solid gray;
 }
 
 .pay-section form {
