@@ -61,7 +61,11 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
     $scope.closeBtn = ()=>{
       $scope.menuPage = false;
     }
+    $scope.payClick = ()=>{
+      this.router.navigateByUrl("/pay");
+    }
 })
+// class for stroe information from JSON file
 class coffeeInfo{
   constructor(id,name,price,description,img){
     this.id = id;
@@ -71,6 +75,7 @@ class coffeeInfo{
     this.img = img;
   }
 }
+// class for stroe information from shopping cart and calculate tax and total by Item
 class checkout{
   constructor(name,size,quantity,price){
     this.name = name;
