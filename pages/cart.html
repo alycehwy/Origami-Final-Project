@@ -2,7 +2,7 @@
 <section class="cart-section" ng-controller="spaCtrl">
 
     <div class="order-list" ng-repeat="obj in cartObj">
-        <img src="{{obj.img}}" alt="icelatte">
+        <img ng-src="{{obj.img}}" alt="icelatte">
         <p>{{obj.name}}</p>
 
         <div class="size-select">
@@ -22,7 +22,7 @@
     </div>
 
     <div class="button">
-        <button class="clear" type="reset">Clear</button>
+        <button class="clear" type="reset" ng-click="cartClear()">Clear</button>
         <button class="pay" type="submit"><a href="#!pay">Pay Now</a></button>
     </div>
 

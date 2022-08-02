@@ -1,7 +1,7 @@
 <!-- PAYMENT SECTION -->
 <section class="pay-section" ng-controller="spaCtrl">
 
-    <form>
+    <form class="pay-form">
         <div>
             <label for="name">Your Name</label>
             <input type=“text” id="name">
@@ -31,7 +31,7 @@
             <input type="number" id="csv">
         </div>
         <div class="payTotal">
-            <p>Total : $ 24.6</p>
+            <p>Total: {{sum}}</p>
         </div>
     </form>
 
@@ -40,12 +40,13 @@
     <div id="pay-done-modal" class="payDone" ng-show="payDoneModal">
         <div class="payDone-content">
             <div>
-                <h1>Pay Success !!</h1>
+                <i class="fa-solid fa-circle-check"></i>
+                <h1>Payment Success</h1>
                 <h3>~ Thank you for shopping on Origami Cafe ~</h3>
             </div>
-            <div>
-                <button type="button"><a href="">Make Another Order</a></button>
-                <button type="button"><a href="">Go Home Page</a></button>
+            <div class="payDoneBtn">
+                <button type="button"><a href="#!menu">Make Another Order</a></button>
+                <button type="button"><a href="#!/">Home Page</a></button>
             </div>
             <div class="modal-background"></div>
         </div>

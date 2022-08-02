@@ -2,7 +2,7 @@
   <div class="menu-container">
     <div ng-repeat="item in JSONObj" data-id="{{item.id}}" class="product-card" ng-click="showItem()">
       <div>
-        <img data-id="{{item.id}}" src={{item.img}}>
+        <img data-id="{{item.id}}" ng-src={{item.img}}>
       </div>
       <div>
         <h4 data-id="{{item.id}}">{{item.name}}</h4>

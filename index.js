@@ -67,6 +67,7 @@ spaApp.controller("spaCtrl",($scope, $rootScope)=>{
     }
     $scope.payDone = ()=>{
       $scope.payDoneModal = true;
+      $rootScope.cartObj = [];
     }
     $scope.addToCart = () => {
       let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
@@ -76,18 +77,24 @@ spaApp.controller("spaCtrl",($scope, $rootScope)=>{
       $scope.closeBtn();  
     }
     $scope.calTotalTax = ()=>{
-      let totalTax = 0;
+      $scope.totalTax = 0;
       for (let tax of $rootScope.cartObj){
-        totalTax += parseFloat(tax.calTaxByItem());
+        $scope.totalTax += parseFloat(tax.calTaxByItem());
       }
-      return totalTax
+      $scope.totalTax = $scope.totalTax.toFixed(2);
+      return $scope.totalTax
     }
     $scope.showTotal = () => {
-      let sum = 0;
+      $rootScope.sum = 0;
       $rootScope.cartObj.forEach(e => {
-        sum += parseFloat(e.CalTotalByItem());
+        $rootScope.sum += parseFloat(e.CalTotalByItem());
       });
-      return sum
+      $rootScope.sum += parseFloat($scope.totalTax);
+      $rootScope.sum = $rootScope.sum.toFixed(2);
+      return $rootScope.sum
+    }
+    $scope.cartClear = () =>{
+      $rootScope.cartObj = []; 
     }
 })
 

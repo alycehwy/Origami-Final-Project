@@ -426,7 +426,7 @@ main {
 }
 
 .cart-section .button input,
-.pay-section [type="submit"] {
+.pay-section [type="submit"], .payDoneBtn button {
   padding: 0.6%;
   font-size: 20px;
   border-radius: 10px;
@@ -467,29 +467,29 @@ main {
   border-top: 1px solid gray;
 }
 
-.pay-section form {
+.pay-form {
   display: flex;
   flex-direction: column;
   row-gap: 45px;
   margin-bottom: 50px;
 }
 
-.pay-section div {
+.pay-form div {
   display: flex;
   justify-content: left;
   column-gap: 35px;
 }
 
-.pay-section label {
+.pay-form label {
   width: 150px;
   font-size: 20px;
 }
 
-.pay-section form input {
+.pay-form input {
   width: 250px;
 }
 
-.pay-section p {
+.pay-form p {
   font-size: 20px;
 }
 
@@ -507,14 +507,15 @@ main {
   left: 0;
   top: 0;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
 .payDone-content {
-  width: 60%;
+  width: 40%;
+  height: 35%;
   margin: 15% auto;
   padding: 50px;
   border: 1px solid #888;
@@ -523,9 +524,35 @@ main {
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.payDone-content div{
+.payDone-content div:nth-child(1) {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.fa-circle-check {
+  font-size: 100px;
+  color:  forestgreen;
+}
+
+.payDoneBtn {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 4%;
+}
+
+.payDoneBtn a {
+  text-decoration: none;
+  color: white;
+}
+
+.payDoneBtn button {
+  width: 40%;
+  padding: 2% 0 2% 0;
 }
