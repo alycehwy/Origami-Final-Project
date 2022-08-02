@@ -1,42 +1,11 @@
 <section id="menu" ng-controller="spaCtrl">
   <div class="menu-container">
-
-    <div class="product-card">
+    <div ng-repeat="item in JSONObj" data-id="{{item.id}}" class="product-card" ng-click="showItem()">
       <div>
-        <img src="../img/Espresso.png" ng-click="showItem()">
+        <img data-id="{{item.id}}" ng-src={{item.img}}>
       </div>
       <div>
-        <h4>Espresso</h4>
-      </div>
-      <div class="background"></div>
-    </div>
-
-    <div class="product-card">
-      <div>
-        <img src="../img/Latte.png">
-      </div>
-      <div>
-        <h4>Latte</h4>
-      </div>
-      <div class="background"></div>
-    </div>
-
-    <div class="product-card">
-      <div>
-        <img src="../img/Frappuchino.png">
-      </div>
-      <div>
-        <h4>Latte</h4>
-      </div>
-      <div class="background"></div>
-    </div>
-
-    <div class="product-card">
-      <div>
-        <img src="../img/Ice_coffe.png">
-      </div>
-      <div>
-        <h4>Latte</h4>
+        <h4 data-id="{{item.id}}">{{item.name}}</h4>
       </div>
       <div class="background"></div>
     </div>
@@ -47,21 +16,21 @@
     <div class="modal-content">
       <span class="close" ng-click="closeBtn()">&times;</span>
       <div class="two-col">
-        <img src="./files/img/Espresso.png">
+        <img src="{{curObj[0].img}}">
         <div>
-          <h4><span>Ice Mocha </span><span>$5.99</span></h4>
-          <p>Premium espresso pour over on dark chocolate ice cream.</p>
+          <h4><span>{{curObj[0].name}}</span><span>{{curObj[0].price}}</span></h4>
+          <p>{{curObj[0].description}}</p>
           <form>
             <label for="">Size: </label>
-            <select name="" id="">
-              <option value="">S</option>
-              <option value="">M</option>
-              <option value="">L</option>
+            <select name="" id="" ng-model="inpSize" ng-init="inpSize = 'S'">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
             </select>
             <label for="">Quantity: </label>
-            <input type="number" name="" id="">
+            <input type="number" ng-model="inpQty" min="1" ng-init="inpQty = 1">
           </form>
-          <button type="button">Add</button>
+          <button type="button" ng-click="addToCart()">Add</button>
         </div>
       </div>
       <div class="modal-background"></div>

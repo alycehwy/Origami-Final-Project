@@ -1,4 +1,4 @@
-let spaApp = angular.module("spaApp",["ngRoute"]);
+let spaApp = angular.module("spaApp",["ngRoute","ngCookies"]);
 spaApp.config(($routeProvider)=>{
     $routeProvider
     .when("/",{
@@ -14,13 +14,29 @@ spaApp.config(($routeProvider)=>{
         templateUrl:"./pages/pay.html"
     })
 })
-spaApp.run(($rootScope)=>{
-    $rootScope.loginPage = true;
-    $rootScope.requiredName = false;
-    $rootScope.requiredLoc = false;
-    $rootScope.menuPage = false;
+spaApp.run(($rootScope, $http)=>{
+  $rootScope.loginPage = true;
+  $rootScope.requiredName = false;
+  $rootScope.requiredLoc = false;
+  $rootScope.menuPage = false;
+  $rootScope.JSONdata = [];
+  $rootScope.JSONObj = [];
+  $rootScope.cartObj = [];
+
+  let id = 1;
+  $http.get('./files/data.json')
+  .then((response) => {
+      $rootScope.JSONdata = response.data;
+      console.log($rootScope.JSONdata);
+      for (let obj of $rootScope.JSONdata) {
+        ItemObj = new coffeeInfo(id, obj.name, obj.price, obj.description, obj.img);
+        $rootScope.JSONObj.push(ItemObj);
+        id++;
+      }
+    }
+  );
 })
-spaApp.controller("spaCtrl",($scope,$http)=>{
+spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
     $scope.loginPageClose = ()=>{
         if($scope.username == undefined && $scope.location == undefined || $scope.location == ""){
             $scope.requiredName = true;
@@ -38,33 +54,57 @@ spaApp.controller("spaCtrl",($scope,$http)=>{
             $scope.loginPage = false;
         }
     };
-    //loading JSON and put informatio to object
-    let JSONdata = [];
-    let JSONObj = [];
-    let id = 1;
-    $http.get('./files/data.json').then(
-      (response)=>{
-        JSONdata = response.data;
-        // console.log(JSONdata);
-        for(let obj of JSONdata){
-          ItemObj = new coffeeInfo(id,obj.name,obj.price,obj.description,obj.img);
-          JSONObj.push(ItemObj);
-          id++;
-        }
-      }
-    );
-    // console.log(JSONObj);
-    // show the menu item in modal box
+
+    // $scope.curObj;
     $scope.showItem = ()=>{
       $scope.menuPage = true;
+      // Print the info on the modal
+      let curSel = parseInt(this.event.target.dataset.id);
+      $scope.curObj = $rootScope.JSONObj.filter(obj => obj.id == curSel);
     }
     $scope.closeBtn = ()=>{
       $scope.menuPage = false;
     }
-    $scope.payClick = ()=>{
-      this.router.navigateByUrl("/pay");
+    $scope.payDone = ()=>{
+      $scope.payDoneModal = true;
+      $rootScope.cartObj = [];
+      $cookies.put("Name",$scope.username);
+      $cookies.put("Phone",$scope.buyerTel);
+      $cookies.put("Email",$scope.buyerEmail);
+      $cookies.put("cardName",$scope.payerName);
+      $cookies.put("cardNum",$scope.payerCard);
+      $cookies.put("Exp",$scope.payerExp);
+      $cookies.put("CSV",$scope.payerCsv);
+    }
+    $scope.addToCart = () => {
+      let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
+      $rootScope.cartObj.push(cartItem);
+      $scope.inpSize = 'S';
+      $scope.inpQty = 1;
+      $scope.closeBtn();  
+    }
+    $scope.calTotalTax = ()=>{
+      $scope.totalTax = 0;
+      for (let tax of $rootScope.cartObj){
+        $scope.totalTax += parseFloat(tax.calTaxByItem());
+      }
+      $scope.totalTax = $scope.totalTax.toFixed(2);
+      return $scope.totalTax
+    }
+    $scope.showTotal = () => {
+      $rootScope.sum = 0;
+      $rootScope.cartObj.forEach(e => {
+        $rootScope.sum += parseFloat(e.CalTotalByItem());
+      });
+      $rootScope.sum += parseFloat($scope.totalTax);
+      $rootScope.sum = $rootScope.sum.toFixed(2);
+      return $rootScope.sum
+    }
+    $scope.cartClear = () =>{
+      $rootScope.cartObj = []; 
     }
 })
+
 // class for stroe information from JSON file
 class coffeeInfo{
   constructor(id,name,price,description,img){
@@ -77,11 +117,12 @@ class coffeeInfo{
 }
 // class for stroe information from shopping cart and calculate tax and total by Item
 class checkout{
-  constructor(name,size,quantity,price){
+  constructor(name,size,quantity,price, img){
     this.name = name;
     this.size = size;
     this.quantity = quantity;
     this.price = price;
+    this.img = img;
   }
   CalTotalByItem(){
     let totalByItem = 0;
