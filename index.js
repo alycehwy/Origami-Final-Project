@@ -1,4 +1,5 @@
 let spaApp = angular.module("spaApp",["ngRoute","ngCookies"]);
+// SPA function
 spaApp.config(($routeProvider)=>{
     $routeProvider
     .when("/",{
@@ -14,6 +15,8 @@ spaApp.config(($routeProvider)=>{
         templateUrl:"./pages/pay.html"
     })
 })
+
+// when page load will run these function
 spaApp.run(($rootScope, $http)=>{
   $rootScope.loginPage = true;
   $rootScope.requiredName = false;
@@ -26,11 +29,11 @@ spaApp.run(($rootScope, $http)=>{
   $rootScope.cartObj = [];
 
   let id = 1;
-  $http.get('./files/data.json')
-  .then((response) => {
-      $rootScope.JSONdata = response.data;
+  $http.get('./files/data.json') // get the JSON file data
+  .then((response) => { 
+      $rootScope.JSONdata = response.data; // put the JSON file data in an array
       // console.log($rootScope.JSONdata);
-      for (let obj of $rootScope.JSONdata) {
+      for (let obj of $rootScope.JSONdata) { // go through the JSON data array and store info to class, then put into JSONObj array
         ItemObj = new coffeeInfo(id, obj.name, obj.price, obj.description, obj.img);
         $rootScope.JSONObj.push(ItemObj);
         id++;
@@ -39,8 +42,9 @@ spaApp.run(($rootScope, $http)=>{
   );
 })
 spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
-    $scope.loginPageClose = ()=>{
-        if($scope.username == undefined && $scope.location == undefined || $scope.location == ""){
+    // login page close function
+    $scope.loginPageClose = ()=>{ // check username and location empty or not
+        if($scope.username == undefined && $scope.location == undefined || $scope.location == ""){ 
             $scope.requiredName = true;
             $scope.requiredLoc = true;
         }
@@ -52,21 +56,23 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
             $scope.requiredName = false;
             $scope.requiredLoc = true;
         }
-        else{
+        else{ // username and location all fill close the login page
             $scope.loginPage = false;
         }
     };
 
     // $scope.curObj;
-    $scope.showItem = ()=>{
+    $scope.showItem = ()=>{ // show the item in menu page
       $scope.menuPage = true;
       // Print the info on the modal
       let curSel = parseInt(this.event.target.dataset.id);
       $scope.curObj = $rootScope.JSONObj.filter(obj => obj.id == curSel);
     }
-    $scope.closeBtn = ()=>{
+
+    $scope.closeBtn = ()=>{ // close the menu modal box function
       $scope.menuPage = false;
     }
+    // check if cookie already exist
     console.log($cookies.getAll());
     if ($cookies.getAll()) {
       console.log("There's a coookie");
@@ -80,14 +86,16 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
     } else {
       console.log("No cookie");
     }
-    $scope.payDone = ()=>{
-      if($rootScope.cartObj == ""){
+
+    $scope.payDone = ()=>{ // Payment button function
+      if($rootScope.cartObj == ""){ // check if cartObj have item or not
         alert("You didn't choose items, please back to menu to choose items");
       }
       else{
-        $scope.payDoneModal = true;
-        $rootScope.cartObj = [];
-        $rootScope.cartNum = false;
+        $scope.payDoneModal = true; // show the pay done modal
+        $rootScope.cartObj = []; // empty the cartObj
+        $rootScope.cartNum = false; // empty the cartNum
+        // store all info into cookie
         $cookies.put("Name",$scope.username);
         $cookies.put("Phone",$scope.buyerTel);
         $cookies.put("Email",$scope.buyerEmail);
@@ -98,43 +106,46 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
         $cookies.put("Total",$rootScope.sum)
       }
     }
-    $scope.addToCart = () => {
-      checkRepeat = false;
-      if($scope.inpQty >= 1){
-        if($rootScope.cartObj == ""){
+
+    $scope.addToCart = () => { // add seleted item to cartObj
+      checkRepeat = false; // variable for identify if add item is same item in cartObj
+      if($scope.inpQty >= 1){ // check qty is valid
+        if($rootScope.cartObj == ""){ // if cartObj is empty, add item to cartObj
           let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
           $rootScope.cartObj.push(cartItem);
         }
-        else{
-          for(let curItem of $rootScope.cartObj){
-            if($scope.curObj[0].name == curItem.name && $scope.inpSize == curItem.size){
-              curItem.quantity += $scope.inpQty;
+        else{ 
+          for(let curItem of $rootScope.cartObj){ // if cartObj is not empty go through the cartObj to find if there have same item, then update qty
+            if($scope.curObj[0].name == curItem.name && $scope.inpSize == curItem.size){ // check name and size is the same
+              curItem.quantity += $scope.inpQty; // update the qty
               checkRepeat = true;
             }
           }
-          if(checkRepeat == false){
+          if(checkRepeat == false){ // if there have no same item, add item to cartObj
             let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
             $rootScope.cartObj.push(cartItem);
           }
         }
-        $scope.inpSize = 'S';
-        $scope.inpQty = 1;
-        $scope.closeBtn();
-        $scope.err = false;
+        $scope.inpSize = 'S'; // define initial size
+        $scope.inpQty = 1; // define initial size
+        $scope.closeBtn(); // close the menu modal box
+        $scope.err = false; // 
         $rootScope.cartNum = true;
         // console.log($rootScope.cartObj)
       }
-      else{
+      else{ // if qty is invalid show error msg
         $scope.err = true;
       }
     }
-    $scope.delCart = ()=>{
+
+    $scope.delCart = ()=>{ // delete the single item
       $rootScope.cartObj.splice(event.target.id, 1);
       if($rootScope.cartObj == ""){
         $rootScope.cartNum = false;
       }
     }
-    $scope.calTotalTax = ()=>{
+
+    $scope.calTotalTax = ()=>{ // calculate total Tax
       $scope.totalTax = 0;
       for (let tax of $rootScope.cartObj){
         $scope.totalTax += parseFloat(tax.calTaxByItem());
@@ -142,7 +153,8 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
       $scope.totalTax = $scope.totalTax.toFixed(2);
       return $scope.totalTax
     }
-    $scope.showTotal = () => {
+
+    $scope.showTotal = () => { // calculate total price
       $rootScope.sum = 0;
       $rootScope.cartObj.forEach(e => {
         $rootScope.sum += parseFloat(e.CalTotalByItem());
@@ -151,16 +163,18 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
       $rootScope.sum = $rootScope.sum.toFixed(2);
       return $rootScope.sum
     }
-    $scope.cartClear = () =>{
+
+    $scope.cartClear = () =>{ // cart all clear
       $rootScope.cartObj = [];
       $rootScope.cartNum = false;
     }
-    $scope.cartPay = () =>{
-      if($rootScope.cartObj == ""){
+
+    $scope.cartPay = () =>{ // check cartObj is empty or not before pay
+      if($rootScope.cartObj == ""){ // if is empty show alert and stay same page
         alert("You didn't choose items");
         $scope.cartLink = "#!cart";
       }
-      else{
+      else{ // if is not empty jump to pay page
         $scope.cartLink = "#!pay";
       }
     }
