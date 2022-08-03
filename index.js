@@ -65,6 +65,19 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
     $scope.closeBtn = ()=>{
       $scope.menuPage = false;
     }
+    console.log($cookies.getAll());
+    if ($cookies.getAll()) {
+      console.log("There's a coookie");
+      $scope.username = $cookies.get("Name");
+      $scope.buyerTel = $cookies.get("Phone");
+      $scope.buyerEmail = $cookies.get("Email");
+      $scope.payerName = $cookies.get("cardName");
+      $scope.payerCard = $cookies.get("cardNum");
+      $scope.payerExp = $cookies.get("Exp");
+      $scope.payerCsv = $cookies.get("CSV");
+    } else {
+      console.log("No cookie");
+    }
     $scope.payDone = ()=>{
       $scope.payDoneModal = true;
       $rootScope.cartObj = [];
