@@ -446,13 +446,23 @@ main {
 }
 
 .order-list p {
-  font-size: 28px;
+  font-size: 2vw;
   width: 150px;
 }
 
 .order-list label {
   font-size: 20px;
   color: gray;
+}
+.size-select{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.quantity-select{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .order-list select {
@@ -478,9 +488,10 @@ main {
   color:#505050;
 }
 
-.price {
+/* .price {
+  float: right; 
   padding-left: 100px;
-}
+} */
 
 .total {
   display: flex;

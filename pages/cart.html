@@ -4,16 +4,16 @@
     <div class="order-list" ng-repeat="(idx,obj) in cartObj">
         <img ng-src="{{obj.img}}" alt="icelatte">
         <p>{{obj.name}}</p>
-
+        <label for="size">Size: </label>
         <div class="size-select">
-            <label for="size">Size: </label>
             <P>{{obj.size}}</P>
         </div>
-        <div class="quantity-select">
-            <label for="quantity">Quantity: </label>
+        <label for="quantity">Quantity: </label>
+        <div class="quantity-select"> 
             <p>{{obj.quantity}}</p>
         </div>
-        <p class="price">Price: {{obj.CalTotalByItem()}}</p>
+        <label for="price">Price:</label>
+        <p class="price">{{obj.CalTotalByItem()}}</p>
         <button type="button" class="fa-solid fa-trash-can" ng-click="delCart()" id="{{idx}}"></button>
     </div>
 
