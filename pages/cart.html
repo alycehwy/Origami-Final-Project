@@ -1,7 +1,7 @@
 <!-- CART SECTIOIN -->
 <section class="cart-section" ng-controller="spaCtrl">
 
-    <div class="order-list" ng-repeat="obj in cartObj">
+    <div class="order-list" ng-repeat="(idx,obj) in cartObj">
         <img ng-src="{{obj.img}}" alt="icelatte">
         <p>{{obj.name}}</p>
 
@@ -14,6 +14,7 @@
             <p>{{obj.quantity}}</p>
         </div>
         <p class="price">Price: {{obj.CalTotalByItem()}}</p>
+        <button type="button" class="fa-solid fa-trash-can" ng-click="delCart()" id="{{idx}}"></button>
     </div>
 
     <div class="total">

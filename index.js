@@ -20,6 +20,7 @@ spaApp.run(($rootScope, $http)=>{
   $rootScope.requiredLoc = false;
   $rootScope.menuPage = false;
   $rootScope.err = false;
+  $rootScope.cartNum = false;
   $rootScope.JSONdata = [];
   $rootScope.JSONObj = [];
   $rootScope.cartObj = [];
@@ -28,7 +29,7 @@ spaApp.run(($rootScope, $http)=>{
   $http.get('./files/data.json')
   .then((response) => {
       $rootScope.JSONdata = response.data;
-      console.log($rootScope.JSONdata);
+      // console.log($rootScope.JSONdata);
       for (let obj of $rootScope.JSONdata) {
         ItemObj = new coffeeInfo(id, obj.name, obj.price, obj.description, obj.img);
         $rootScope.JSONObj.push(ItemObj);
@@ -84,17 +85,37 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
       }
     }
     $scope.addToCart = () => {
+      checkRepeat = false;
       if($scope.inpQty >= 1){
-        let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
-        $rootScope.cartObj.push(cartItem);
+        if($rootScope.cartObj == ""){
+          let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
+          $rootScope.cartObj.push(cartItem);
+        }
+        else{
+          for(let curItem of $rootScope.cartObj){
+            if($scope.curObj[0].name == curItem.name && $scope.inpSize == curItem.size){
+              curItem.quantity += $scope.inpQty;
+              checkRepeat = true;
+            }
+          }
+          if(checkRepeat == false){
+            let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
+            $rootScope.cartObj.push(cartItem);
+          }
+        }
         $scope.inpSize = 'S';
         $scope.inpQty = 1;
         $scope.closeBtn();
         $scope.err = false;
+        $rootScope.cartNum = true;
+        // console.log($rootScope.cartObj)
       }
       else{
         $scope.err = true;
       }
+    }
+    $scope.delCart = ()=>{
+      $rootScope.cartObj.splice(event.target.id, 1);
     }
     $scope.calTotalTax = ()=>{
       $scope.totalTax = 0;

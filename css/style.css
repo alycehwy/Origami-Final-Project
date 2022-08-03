@@ -40,21 +40,45 @@ main {
 .nav {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   width: 100%;
   font-size: 30px;
   font-weight: 100;
 }
 
 .no_link {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
   pointer-events: none;
   text-decoration: none;
   color: black;
 }
 
 .link {
+  display: flex;
   text-decoration: none;
   color: black;
+  width: fit-content;
+}
+
+.link aside {
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+  
+}
+
+.link aside p {
+  text-align:center;
+  vertical-align: middle;
+  font-size: 20px;
+  font-weight: 400;
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color:crimson;
+  border-radius: 50%;
 }
 
 /* Footer */
@@ -402,6 +426,13 @@ main {
   width: 25vh;
   height: 25vh;
   border-radius: 10%;
+}
+
+.order-list button {
+  font-size: 30px;
+  color:#aaa;
+  background-color: white;
+  border: none;
 }
 
 .price {
