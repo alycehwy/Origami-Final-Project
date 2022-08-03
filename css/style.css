@@ -1,7 +1,7 @@
 * {
   padding: 0;
   margin: 0;
-  
+
 }
 
 body {
@@ -270,7 +270,7 @@ main {
 }
 
 .product-card img {
-  width:100%;
+  width: 100%;
 }
 
 .background {
@@ -308,6 +308,39 @@ main {
   position: relative;
 }
 
+.modal-content form {
+  display: flex;
+  justify-content: left;
+  column-gap: 3%;
+}
+
+.modal-content label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal-content select {
+  width: 15%;
+  font-size: 20px;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.modal-content input {
+  font-size: 20px;
+}
+
+.modal-content button {
+  height: 15%;
+  margin-top: 5%;
+  padding: 1%;
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: #492401;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
 .modal-background {
   width: 100%;
   height: 100%;
@@ -339,8 +372,13 @@ main {
 .two-col {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   row-gap: 20px;
+  column-gap: 65px;
+}
+
+.two-col h4 {
+  font-size: 30px;
 }
 
 .two-col img {
@@ -348,14 +386,15 @@ main {
 }
 
 .two-col>div {
-  width: 48%;
+  width: 46%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
 }
 
 .two-col input {
-  width: 40px;
+  width: 45px;
+  text-align: center;
 }
 
 .err {
@@ -431,7 +470,8 @@ main {
 }
 
 .cart-section .button input,
-.pay-section [type="submit"], .payDoneBtn button {
+.pay-section [type="submit"],
+.payDoneBtn button {
   padding: 0.6%;
   font-size: 20px;
   border-radius: 10px;
@@ -440,7 +480,7 @@ main {
   cursor: pointer;
 }
 
-.clear{
+.clear {
   padding: 0.6%;
   font-size: 20px;
   border-radius: 10px;
@@ -448,7 +488,7 @@ main {
   color: #FFFFFF;
 }
 
-.pay{
+.pay {
   padding: 0.6%;
   font-size: 20px;
   border-radius: 10px;
@@ -542,7 +582,7 @@ main {
 
 .fa-circle-check {
   font-size: 100px;
-  color:  forestgreen;
+  color: forestgreen;
 }
 
 .payDoneBtn {
