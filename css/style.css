@@ -57,6 +57,7 @@ main {
 
 .link {
   display: flex;
+  column-gap: 8px;
   text-decoration: none;
   color: black;
   width: fit-content;
@@ -65,7 +66,7 @@ main {
 .link aside {
   display: flex;
   align-items: center;
-  padding-left: 5%;
+  padding-left: 2%;
   
 }
 

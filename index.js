@@ -87,6 +87,7 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
       else{
         $scope.payDoneModal = true;
         $rootScope.cartObj = [];
+        $rootScope.cartNum = false;
         $cookies.put("Name",$scope.username);
         $cookies.put("Phone",$scope.buyerTel);
         $cookies.put("Email",$scope.buyerEmail);
