@@ -358,6 +358,11 @@ main {
   width: 40px;
 }
 
+.err {
+  color: red;
+  font-weight: 600;
+}
+
 /* Cart Section */
 .cart-section {
   /* background-color: aqua; */

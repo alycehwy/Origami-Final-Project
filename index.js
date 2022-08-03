@@ -19,6 +19,7 @@ spaApp.run(($rootScope, $http)=>{
   $rootScope.requiredName = false;
   $rootScope.requiredLoc = false;
   $rootScope.menuPage = false;
+  $rootScope.err = false;
   $rootScope.JSONdata = [];
   $rootScope.JSONObj = [];
   $rootScope.cartObj = [];
@@ -66,22 +67,34 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
       $scope.menuPage = false;
     }
     $scope.payDone = ()=>{
-      $scope.payDoneModal = true;
-      $rootScope.cartObj = [];
-      $cookies.put("Name",$scope.username);
-      $cookies.put("Phone",$scope.buyerTel);
-      $cookies.put("Email",$scope.buyerEmail);
-      $cookies.put("cardName",$scope.payerName);
-      $cookies.put("cardNum",$scope.payerCard);
-      $cookies.put("Exp",$scope.payerExp);
-      $cookies.put("CSV",$scope.payerCsv);
+      if($rootScope.cartObj == ""){
+        alert("You didn't choose items, please back to menu to choose items");
+      }
+      else{
+        $scope.payDoneModal = true;
+        $rootScope.cartObj = [];
+        $cookies.put("Name",$scope.username);
+        $cookies.put("Phone",$scope.buyerTel);
+        $cookies.put("Email",$scope.buyerEmail);
+        $cookies.put("cardName",$scope.payerName);
+        $cookies.put("cardNum",$scope.payerCard);
+        $cookies.put("Exp",$scope.payerExp);
+        $cookies.put("CSV",$scope.payerCsv);
+        $cookies.put("Total",$rootScope.sum)
+      }
     }
     $scope.addToCart = () => {
-      let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
-      $rootScope.cartObj.push(cartItem);
-      $scope.inpSize = 'S';
-      $scope.inpQty = 1;
-      $scope.closeBtn();  
+      if($scope.inpQty >= 1){
+        let cartItem = new checkout($scope.curObj[0].name, $scope.inpSize, $scope.inpQty, $scope.curObj[0].price, $scope.curObj[0].img);
+        $rootScope.cartObj.push(cartItem);
+        $scope.inpSize = 'S';
+        $scope.inpQty = 1;
+        $scope.closeBtn();
+        $scope.err = false;
+      }
+      else{
+        $scope.err = true;
+      }
     }
     $scope.calTotalTax = ()=>{
       $scope.totalTax = 0;
@@ -102,6 +115,15 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
     }
     $scope.cartClear = () =>{
       $rootScope.cartObj = []; 
+    }
+    $scope.cartPay = () =>{
+      if($rootScope.cartObj == ""){
+        alert("You didn't choose items");
+        $scope.cartLink = "#!cart";
+      }
+      else{
+        $scope.cartLink = "#!pay";
+      }
     }
 })
 

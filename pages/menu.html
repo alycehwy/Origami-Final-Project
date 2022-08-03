@@ -30,6 +30,7 @@
             <label for="">Quantity: </label>
             <input type="number" ng-model="inpQty" min="1" ng-init="inpQty = 1">
           </form>
+          <p class="err" ng-show="err">Quantity value is invalid</p>
           <button type="button" ng-click="addToCart()">Add</button>
         </div>
       </div>
