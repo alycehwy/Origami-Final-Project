@@ -129,6 +129,9 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
     }
     $scope.delCart = ()=>{
       $rootScope.cartObj.splice(event.target.id, 1);
+      if($rootScope.cartObj == ""){
+        $rootScope.cartNum = false;
+      }
     }
     $scope.calTotalTax = ()=>{
       $scope.totalTax = 0;
@@ -148,7 +151,8 @@ spaApp.controller("spaCtrl",($scope,$rootScope,$cookies)=>{
       return $rootScope.sum
     }
     $scope.cartClear = () =>{
-      $rootScope.cartObj = []; 
+      $rootScope.cartObj = [];
+      $rootScope.cartNum = false;
     }
     $scope.cartPay = () =>{
       if($rootScope.cartObj == ""){

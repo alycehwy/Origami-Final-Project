@@ -474,6 +474,10 @@ main {
   border: none;
 }
 
+.order-list button:hover {
+  color:#505050;
+}
+
 .price {
   padding-left: 100px;
 }
